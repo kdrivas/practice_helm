@@ -1,0 +1,17 @@
+piVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-prod
+  namespace: argocd
+spec:
+  project: default
+  source:
+    helm:
+      valueFiles:
+      - values-prod.yaml
+    repoURL: https://github.com/kdrivas/practice_helm
+    targetRevision: HEAD
+    path: myChart
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
